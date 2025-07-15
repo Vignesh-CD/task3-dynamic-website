@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vignesh-CD task3</title>
+    <link rel="stylesheet" href="./account.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Candal&family=Gloock&family=Marko+One&family=Protest+Strike&family=Roboto:ital,wght@0,100..900;1,100..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="account-detail">
+        <div class="account-nav">
+            <img src="./Images/CD-logo.png" alt="Crystal Delta Logo" class="CD-logo"/>
+            <button onclick="logout()"><h3>Logout</h3></button>
+        </div>
+        <div class="greetings-message">
+            <h1 id="welcomeMsg">Greetings</h1>
+            <h3 id="transfer-message"></h3>
+        </div>
+<div class="container">
+    <div class="sidebar">
+      <ul >
+        <li id="account_summary" onclick="transfer_tab('account_summary')" class="active" >Account Summary</li>
+        <li id="transfer_fund" onclick="transfer_tab('transfer_fund')"> Transfer Fund</li>
+      </ul>
+    </div>
+    <div id="account-summary-content" class="content">
+      <h2>Account Summary</h2>
+
+      <details class="account-box">
+        <summary class="account-header">
+          <h3>Savings Account</h3>
+          <span>Closing balance: <strong>20,000.50</strong></span>
+          <button class="toggle-btn">▼</button>
+        </summary>
+        <div class="account-details">
+        <div>
+          <p>Account Number: 123456789</p>
+          <p>Name: John Doe</p>
+          </div>
+
+          <div>
+          <p>Branch: Main Street</p>
+          <p>IFSC Code: ABCD0123456</p>
+          </div>
+          <button onclick="viewStatement()">View Statement</button>
+        </div>
+      </details>
+
+      <details class="account-box">
+        <summary class="account-header">
+          <h3>Current Account</h3>
+          <span>Closing balance: <strong>24,583.00</strong></span>
+                 <button class="toggle-btn">▼</button>
+        </summary>
+                <div class="account-details">
+        <div>
+          <p>Account Number: 123456789</p>
+          <p>Name: John Doe</p>
+          </div>
+
+          <div>
+          <p>Branch: Main Street</p>
+          <p>IFSC Code: ABCD0123456</p>
+          </div>
+          <button onclick="viewStatement()">View Statement</button>
+        </div>
+      </details>
+
+      <details class="account-box">
+        <summary class="account-header">
+          <h3>Credit Account</h3>
+          <span>Closing balance: <strong>16,792.10</strong></span>
+                 <button class="toggle-btn">▼</button>
+        </summary>
+        <div class="account-details">
+        <div>
+          <p>Card Number: XXXX XXXX XXXX 1687</p>
+          <p>Name: John Doe</p>
+          </div>
+
+          <div>
+          <p>Type: Visa</p>
+          </div>
+          <button onclick="viewStatement()">View Statement</button>
+        </div>
+      </details>
+    </div>
+<div id="transfer_fund_content" class="content" style="display: none;">
+  <div id="transferFund" class="tab-content-container">
+    <h1 class="transfer-text">Transfer Fund</h1>
+    <div class="sub-tab">
+      <table class="transfer-fund-table">
+        <tr class="transfer-form-pair">
+          <td>Choose an Account</td>
+          <td>
+            <select id="account-type">
+              <option value="">-Select an account-</option>
+              <option value="savings">Savings Account</option>
+              <option value="current">Current Account</option>
+              <option value="credit">Credit Account</option>
+            </select>
+          </td>
+        </tr>
+        <tr class="transfer-form-pair">
+          <td>Beneficiary Account</td>
+          <td>
+            <select id="beneficiary">
+              <option value="">-Select a Beneficiary-</option>
+              <option value="Mark & Spensers">Mark & Spensers</option>
+              <option value="Kiruba Credit">Kiruba Credit</option>
+              <option value="Louis Vitton Glasses">Louis Vitton Glasses</option>
+              <option value="Groceris Store Bill">Groceris Store Bill</option>
+              <option value="Kishore Credit">Kishore Credit</option>
+            </select>
+          </td>
+        </tr>
+        <tr class="transfer-form-pair">
+          <td>Amount in Rupees</td>
+          <td>
+            <input id="amount" type="number">
+          </td>
+        </tr>
+        <tr class="transfer-form-pair">
+          <td>Remarks</td>
+          <td>
+            <textarea id="remarks"></textarea>
+          </td>
+        </tr>
+      </table>
+
+      <div class="transfer-form-buttons">
+        <button class="btn" onclick="resetForm()">Reset</button>
+        <button class="btn btn-teal" onclick="money_transfer()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="statement" class="model">
+      <div class="statement-content">
+        <button onclick="closeStatement()">Back</button>
+        <div class="statement-heading-container">
+          <span class="statement-heading">Statement</span>
+          <span id="statement-acc-Number"></span>
+        </div>
+        <table class="statement-table"  id="statement">
+          <tr >
+            <th>Date</th>
+            <th>Description</th>
+            <th>Transaction No</th>
+            <th>Credit / Debit</th>
+            <th>Closing balence</th>
+          </tr>
+          <tr>
+             <td>10/2/2025</td>
+             <td>Payment Send</td>
+             <td>TXN123456</td>
+             <td>-500</td>
+             <td>23.500</td>
+          </tr>
+          <tr>
+             <td>8/2/2025</td>
+             <td>Payment Sent</td>
+             <td>TXN123457</td>
+             <td>-4000</td>
+             <td>19.500</td>
+          </tr>
+                  <tr>
+             <td>6/1/2025</td>
+             <td>Payment Received</td>
+             <td>TXN16574</td>
+             <td>+1000</td>
+             <td>20.500</td>
+          </tr>
+                  <tr>
+             <td>16/9/2025</td>
+             <td>Payment Received</td>
+             <td>TXN186527</td>
+             <td>+2500</td>
+             <td>23.000</td>
+          </tr>
+                  <tr>
+             <td>10/12/2025</td>
+             <td>Payment Sent</td>
+             <td>TXN145877</td>
+             <td>-1000</td>
+             <td>22.000</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    </section>
+    <script src="./account.js"></script>
+</body>
+</html>
